@@ -8,7 +8,7 @@
 Database :- asmsdb
 
 <h1 align="center"> Student table </h1>
-<table align="center">
+<table align="center" text-align="center">
 <tr>
 <th> Field </th>
 <th> Type  </th>
