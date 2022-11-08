@@ -5,7 +5,7 @@
 
 
 
-Database :- asmsdb
+
 
 <h1 align="center"> Student table </h1>
 <table align="center" text-align="center">
