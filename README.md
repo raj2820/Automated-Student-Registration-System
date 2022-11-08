@@ -50,3 +50,52 @@
 <td> </td>
 </tr>
 </table>
+
+<h1 align="center">Course Table</h1>
+
+
+
+
+
+<table align="center" text-align="center">
+<tr>
+<th> Field </th>
+<th> Type  </th>
+<th> Null </th>
+<th>  Key </th>
+<th>  Default </th>
+<th>   Extra   </th>
+</tr>
+<tr>
+<td>cid</td>
+<td> int  </td>
+<td>NO  </td>
+<td> PRI</td>
+<td>NULL  </td>
+<td>auto_increment </td>
+</tr>
+<tr>
+<td>cname  </td>
+<td> varchar(20) </td>
+<td> YES </td>
+<td> </td>
+<td>NULL </td>
+<td> </td>
+</tr>
+<tr>
+<td>fee  </td>
+<td> int</td>
+<td>YES  </td>
+<td> </td>
+<td> NULL</td>
+<td> </td>
+</tr>
+<tr>
+<td> duration</td>
+<td>varchar(20) </td>
+<td> YES </td>
+<td> </td>
+<td>NULL </td>
+<td> </td>
+</tr>
+</table>
