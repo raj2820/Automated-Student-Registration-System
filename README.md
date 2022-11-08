@@ -1,5 +1,5 @@
 # expert-chance-2924
-<h1 text-align:center> Project topic :- Automated Student Registration System .</h1>
+<h1 align:center> Project topic :- Automated Student Registration System .</h1>
 
 
 
