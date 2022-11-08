@@ -16,8 +16,8 @@ public class DBUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
-String url ="jdbc:mysql://localhost:3306/studentdb";
-
+String url ="jdbc:mysql://localhost:3306/asmsdb";
+//asmsdb:- abbreviation for Automated student management system database;
 try {
 	conn = DriverManager.getConnection(url, "root","root");
 } catch (SQLException e) {
