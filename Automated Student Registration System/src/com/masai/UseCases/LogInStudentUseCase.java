@@ -21,10 +21,10 @@ public class LogInStudentUseCase {
 		
 		StudentDao dao=	new StudentDaoImpl();
 		try {
-			Student student = dao.signIn(username, password);
+			Student student = dao.signIn(username, password); //login method
 			System.out.println("Welcome "+student.getName().toUpperCase());
 			
-			
+			//Options to choose enrollment method and updating password method.
 			System.out.println("Enter 1 for course enrollment ");
 			
 			System.out.println("Enter 2 for updating password ");
@@ -32,6 +32,7 @@ public class LogInStudentUseCase {
 			
 			
 			if(x == 1) {
+				
 				System.out.println("Enter Roll : ");
 				int roll= sc.nextInt();
 					
@@ -39,13 +40,13 @@ public class LogInStudentUseCase {
 						int cid= sc.nextInt();
 						
 						try {
-							String result = dao.enrollStudentInCourse(roll,cid);
+							String result = dao.enrollStudentInCourse(roll,cid); //Enrollment method.
 						System.out.println(result);
 						} catch (StudentException e) {
-							// TODO Auto-generated catch block
+						
 							e.printStackTrace();
 						} catch (CourseException e) {
-							// TODO Auto-generated catch block
+						
 							e.printStackTrace();
 						}
 			}else if(x == 2) {
@@ -66,7 +67,7 @@ public class LogInStudentUseCase {
 					System.out.println("New password cannot be your current password...");
 					return;
 				}
-				String result =dao.changeStudentPassword(username,pass,newPassword2);
+				String result =dao.changeStudentPassword(username,pass,newPassword2); //update password method.
 				System.out.println(result);
 			}
 				
