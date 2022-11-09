@@ -13,6 +13,7 @@ import com.masai.exception.CourseException;
 import com.masai.exception.StudentException;
 import com.masai.model.Admin;
 import com.masai.model.AdminStudentCourseDTO;
+import com.masai.model.Course;
 
 public class AdminDaoImpl implements AdminDao{
 
@@ -51,7 +52,7 @@ PreparedStatement ps = conn.prepareStatement("select s.roll,s.name,s.username"
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new CourseException();
+			throw new CourseException(e.getMessage());
 			
 		}
 		
@@ -122,6 +123,102 @@ PreparedStatement ps = conn.prepareStatement("select s.roll,s.name,s.username"
 		
 
 		return admin;
+	}
+
+	@Override
+	public String updateFee(int cid , int fee) throws CourseException {
+		String message = "Fees not updated......";
+		
+		try(Connection conn = DBUtil.provideConnection()) {
+		
+			PreparedStatement ps =conn.prepareStatement("update course set fee = ? where cid = ? ");
+			ps.setInt(1, fee);
+			ps.setInt(2,cid);
+			
+			int x =ps.executeUpdate();
+			if(x > 0) 
+				message = "Fees of the course updated to "  + fee ;	
+			else
+				message = "Failed to update fees for the course";
+		}
+		
+		catch (SQLException e) {
+		e.printStackTrace();
+		throw new CourseException(e.getMessage());
+		}
+		
+		
+		
+		
+		return message;
+	}
+
+	@Override
+	public String deleteCourse(int cid) throws CourseException {
+	String message = "Course not deleted";
+	
+	try(Connection conn = DBUtil.provideConnection()) {
+		
+		PreparedStatement ps = conn.prepareStatement("DELETE from course WHERE cid = ? ");
+		
+		ps.setInt(1, cid);
+		
+		int x =ps.executeUpdate();
+		
+		if(x > 0) 
+			message = "Course"+ cid +" deleted from the table" ;
+		else
+			message="Course not deleted";
+		
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+		throw new CourseException(e.getMessage());
+	}
+	
+
+
+	
+	
+	return message;
+	
+	}
+
+	@Override
+	public String addCourse(String cname,int fee,String duration) {
+		String message ="Course not added";
+		
+		try(Connection conn =DBUtil.provideConnection()) {
+			
+			PreparedStatement ps =conn.prepareStatement("insert into course (cname,fee,duration) values(?,?,?)");
+			ps.setString(1,cname);
+			ps.setInt(2, fee);
+			ps.setString(3,duration);
+			
+			int x =ps.executeUpdate();
+			if(x > 0)
+				message ="Course added sucessfully";
+			else
+				message = "Course not added";
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+		
+		return message;
+	}
+
+	@Override
+	public String createBatch(String batchName, int cid, int roll, String name) throws CourseException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
