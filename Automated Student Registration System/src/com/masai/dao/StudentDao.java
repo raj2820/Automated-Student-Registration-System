@@ -11,5 +11,5 @@ public interface StudentDao {
 	
 	public String enrollStudentInCourse(int roll ,int cid ) throws StudentException , CourseException;
 	
-	public String changeStudentPassword(String username ,String newPassword) throws StudentException;
+	public String changeStudentPassword(String username ,String password,String newPassword) throws StudentException;
 }
