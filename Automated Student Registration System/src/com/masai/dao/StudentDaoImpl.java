@@ -4,11 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.masai.Utility.DBUtil;
 import com.masai.exception.CourseException;
 import com.masai.exception.StudentException;
+import com.masai.model.Course;
 import com.masai.model.Student;
+import com.masai.model.StudentStudentCourseDTO;
 import com.mysql.cj.xdevapi.Result;
 
 public class StudentDaoImpl implements StudentDao{
@@ -38,7 +42,7 @@ String result = "Not Inserted..";
 	}
 
 	@Override
-	public Student signIn(String username, String password) throws StudentException {
+	public Student studentSignIn(String username, String password) throws StudentException {
 		Student student =null;
 		
 		
@@ -146,6 +150,44 @@ String result = "Not Inserted..";
 		}
 
 		return message;
+	}
+
+	@Override
+	public List<StudentStudentCourseDTO> getAllCourseInfo() throws CourseException {
+		 List<StudentStudentCourseDTO> dtos = new ArrayList<>();
+		 
+		 
+		 try(Connection conn = DBUtil.provideConnection()) {
+			
+			PreparedStatement ps=conn.prepareStatement(" select c.cid,c.cname,c.fee ,c.duration,"
+					+ " count(s.roll) Total_Students from course c INNER JOIN student s INNER JOIN student_course sc where "
+					+ "s.roll=sc.roll AND c.cid=sc.cid group by c.cid;"); 
+			 
+			ResultSet rs =ps.executeQuery();
+			
+			while(rs.next()) {
+			StudentStudentCourseDTO dto =new StudentStudentCourseDTO();
+			dto.setCid(rs.getInt("cid"));
+			dto.setCname(rs.getString("cname"));
+			dto.setDuration(rs.getString("duration"));
+			dto.setFee(rs.getInt("fee"));
+			dto.setTotal_students(rs.getInt("total_students"));
+			
+			
+			dtos.add(dto);
+			}
+			if(dtos.size()==0) {
+				throw new CourseException("No student in that course");
+			}
+			 
+			 
+		} catch (SQLException e) {
+			// TODO: handle exception
+			throw new CourseException(e.getMessage());
+		}
+		 
+		 
+		 return dtos;
 	}
 
 }

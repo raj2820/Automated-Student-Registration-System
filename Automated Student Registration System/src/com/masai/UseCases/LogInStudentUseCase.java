@@ -21,7 +21,7 @@ public class LogInStudentUseCase {
 		
 		StudentDao dao=	new StudentDaoImpl();
 		try {
-			Student student = dao.signIn(username, password); //login method
+			Student student = dao.studentSignIn(username, password); //login method
 			System.out.println("Welcome "+student.getName().toUpperCase());
 			
 			//Options to choose enrollment method and updating password method.
