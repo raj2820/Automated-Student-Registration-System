@@ -44,7 +44,7 @@ String result = "Not Inserted..";
 		
 		try(Connection conn=DBUtil.provideConnection()) {
 			
-	PreparedStatement ps = conn.prepareStatement("select * from student where username = ? AND password = ?");
+	PreparedStatement ps = conn.prepareStatement("select * from student where username = ? AND password = ?"); //SQL query to validate username and password.
 	ps.setString(1, username);
 		ps.setString(2, password);	 
 		
@@ -55,7 +55,7 @@ String result = "Not Inserted..";
 	String n =rs.getString("name");
 	String u = rs.getString("username");
 	String p = rs.getString("password");
-	student=new Student(r,n,u,p);
+	student=new Student(r,n,u,p); 
 	}
 	else {
 		throw new StudentException("Invalid username or password...");
