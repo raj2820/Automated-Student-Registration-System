@@ -135,18 +135,31 @@ String result = "Not Inserted..";
 	}
 
 	@Override
-	public String changeStudentPassword( String username ,String newPassword) throws StudentException {
+	public String changeStudentPassword( String username,String password ,String newPassword) throws StudentException {
 		String message = "Password not updated .";
-
+		boolean flag=false;
 		try(Connection conn = DBUtil.provideConnection()) {
-			PreparedStatement ps = conn.prepareStatement("update student set password = ?  where username = ?");
-	ps.setString(1, newPassword);
-	ps.setString(2,username);
-			int x =ps.executeUpdate();
-			if(x > 0)
-				message="Password Updated .....";
-			else
-				message="Updation failed....";
+		
+
+			PreparedStatement ps1 =conn.prepareStatement("select * from student where password = ? ");
+			ps1.setString(1,password);
+			ResultSet rs = ps1.executeQuery();
+			if(rs.next()) {
+				flag=true;
+			}else {
+				message="incorrect password..!";
+			}
+			if(flag==true) {
+				PreparedStatement ps = conn.prepareStatement("update student set password = ?  where username = ?");
+				ps.setString(1, newPassword);
+				ps.setString(2,username);
+						int x =ps.executeUpdate();
+						if(x > 0)
+							message="Password Updated .....";
+						else
+							message="Updation failed....";
+			}
+			
 		} catch (SQLException e) {
 			throw new StudentException(e.getMessage());
 		}

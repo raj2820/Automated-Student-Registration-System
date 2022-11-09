@@ -58,16 +58,24 @@ public class LogInStudentUseCase {
 							e.printStackTrace();
 						}
 			}else if(x == 2) {
+	System.out.println("Enter current password");
 				
+				String pass=sc.next();
 				System.out.println("Enter your new password");
 				
 				String newPassword=sc.next();
+				System.out.println("re-enter new password");
+				String newPassword2=sc.next();
+				if(!newPassword.equals(newPassword2)) {
+					System.out.println("Password does not match...!");
+					return;
+				}
 				if(newPassword.equals(password)) {
 				
 					System.out.println("New password cannot be your current password...");
 					return;
 				}
-				String result =dao.changeStudentPassword(username,newPassword);
+				String result =dao.changeStudentPassword(username,pass,newPassword2);
 				System.out.println(result);
 			}
 			
