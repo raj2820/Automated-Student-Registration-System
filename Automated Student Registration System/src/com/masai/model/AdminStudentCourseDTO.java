@@ -1,6 +1,6 @@
 package com.masai.model;
 
-public class StudentCourseDTO {
+public class AdminStudentCourseDTO {
  
 	private int roll;
 	private String sname;
@@ -9,7 +9,7 @@ public class StudentCourseDTO {
 	private String cname;
 	private String duration;
 	
-	public StudentCourseDTO() {
+	public AdminStudentCourseDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -55,7 +55,7 @@ public class StudentCourseDTO {
 
 	@Override
 	public String toString() {
-		return "StudentCourseDTO [roll=" + roll + ", sname=" + sname + ", susername=" + username + ", cname=" + cname
+		return "StudentCourseDTO [roll=" + roll + ", sname=" + sname + ", username=" + username + ", cname=" + cname
 				+ ", duration=" + duration + "]";
 	}
 	
