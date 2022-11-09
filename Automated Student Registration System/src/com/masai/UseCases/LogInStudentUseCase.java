@@ -1,10 +1,12 @@
 package com.masai.UseCases;
+import java.util.List;
 import java.util.Scanner;
 import com.masai.dao.StudentDao;
 import com.masai.dao.StudentDaoImpl;
 import com.masai.exception.CourseException;
 import com.masai.exception.StudentException;
 import com.masai.model.Student;
+import com.masai.model.StudentStudentCourseDTO;
 
 public class LogInStudentUseCase {
 
@@ -28,11 +30,12 @@ public class LogInStudentUseCase {
 			System.out.println("Enter 1 for course enrollment ");
 			
 			System.out.println("Enter 2 for updating password ");
+			System.out.println("Enter 3 to see all courses info");
+			System.out.println("Enter 4 to log out.....");
 			int x=sc.nextInt();
 			
-			
-			if(x == 1) {
-				
+			switch (x) {
+			case 1: {
 				System.out.println("Enter Roll : ");
 				int roll= sc.nextInt();
 					
@@ -49,8 +52,11 @@ public class LogInStudentUseCase {
 						
 							e.printStackTrace();
 						}
-			}else if(x == 2) {
-	System.out.println("Enter current password");
+						break;
+				
+			}
+			case 2:{
+System.out.println("Enter current password");
 				
 				String pass=sc.next();
 				System.out.println("Enter your new password");
@@ -69,11 +75,31 @@ public class LogInStudentUseCase {
 				}
 				String result =dao.changeStudentPassword(username,pass,newPassword2); //update password method.
 				System.out.println(result);
+				break;
+			}case 3:{
+
+				try {
+					 List<StudentStudentCourseDTO> dtos = dao.getAllCourseInfo();
+					 dtos.forEach(s->System.out.println(s));
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+				
+				break;
+				
+			}case 4:{
+				
+				
+				System.out.println("Logged out sucessfully......");
+				return;
 			}
+			
+			}
+			
 				
 		} catch (StudentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
 		System.out.println(e.getMessage());
 		}
 	}
