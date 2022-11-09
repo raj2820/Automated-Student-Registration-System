@@ -18,8 +18,8 @@ Scanner sc= new Scanner(System.in);
 
 		
 
-		System.out.println("Enter Student email/username :");
-		String email= sc.next();
+		System.out.println("Enter Student username(email) :");
+		String username= sc.next();
 		
 		System.out.println("Enter Password :");
 		String password= sc.next();
@@ -28,7 +28,7 @@ Scanner sc= new Scanner(System.in);
 		Student student= new Student();
 		student.setName(name);
 		
-		student.setEmail(email);
+		student.setEmail(username);
 		student.setPassword(password);
 		
 		StudentDao dao = new StudentDaoImpl();
