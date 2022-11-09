@@ -11,17 +11,22 @@ public class DBUtil {
 		Connection conn =null;
 		
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");//loading driver related main class into the memory.
+			
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}	
-String url ="jdbc:mysql://localhost:3306/asmsdb";
+String url ="jdbc:mysql://localhost:3306/asmsdb"; //connecting string.
+
 //asmsdb:- abbreviation for Automated student management system database;
+
+
+
 try {
-	conn = DriverManager.getConnection(url, "root","root");
+	conn = DriverManager.getConnection(url, "root","root");//establishing connection , username="root" and password="root" for MySQL database .
 } catch (SQLException e) {
-	// TODO Auto-generated catch block
+
 	e.printStackTrace();
 }
 		return conn;

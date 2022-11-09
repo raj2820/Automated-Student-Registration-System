@@ -16,15 +16,12 @@ Scanner sc= new Scanner(System.in);
 		System.out.println("Enter Student Name :");
 		String name= sc.next();
 
-		
-
 		System.out.println("Enter Student username(email) :");
 		String username= sc.next();
 		
 		System.out.println("Enter Password :");
 		String password= sc.next();
 
-		
 		Student student= new Student();
 		student.setName(name);
 		
@@ -37,16 +34,9 @@ Scanner sc= new Scanner(System.in);
 		String result= dao.registerStudent(student);
 		
 		System.out.println(result);
-		
-		
 		}catch (StudentException e) {
 			System.out.println(e.getMessage());
 		}
-		
-		
-		
-		
-		
 	}
 
 }

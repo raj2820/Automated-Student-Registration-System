@@ -1,8 +1,5 @@
 package com.masai.UseCases;
-
-
 import java.util.Scanner;
-
 import com.masai.dao.StudentDao;
 import com.masai.dao.StudentDaoImpl;
 import com.masai.exception.CourseException;
@@ -15,8 +12,6 @@ public class LogInStudentUseCase {
 		// TODO Auto-generated method stub
 
 		Scanner sc= new Scanner(System.in);
-		
-
 
 		System.out.println("Enter Student username :");
 		String username= sc.next();
@@ -24,14 +19,12 @@ public class LogInStudentUseCase {
 		System.out.println("Enter Password :");
 		String password= sc.next();
 		
-		
-		
 		StudentDao dao=	new StudentDaoImpl();
 		try {
-			Student student = dao.signIn(username, password);
+			Student student = dao.signIn(username, password); //login method
 			System.out.println("Welcome "+student.getName().toUpperCase());
 			
-			
+			//Options to choose enrollment method and updating password method.
 			System.out.println("Enter 1 for course enrollment ");
 			
 			System.out.println("Enter 2 for updating password ");
@@ -39,22 +32,21 @@ public class LogInStudentUseCase {
 			
 			
 			if(x == 1) {
+				
 				System.out.println("Enter Roll : ");
 				int roll= sc.nextInt();
 					
 						System.out.println("Enter Course Id : ");
 						int cid= sc.nextInt();
 						
-						
-					
 						try {
-							String result = dao.enrollStudentInCourse(roll,cid);
+							String result = dao.enrollStudentInCourse(roll,cid); //Enrollment method.
 						System.out.println(result);
 						} catch (StudentException e) {
-							// TODO Auto-generated catch block
+						
 							e.printStackTrace();
 						} catch (CourseException e) {
-							// TODO Auto-generated catch block
+						
 							e.printStackTrace();
 						}
 			}else if(x == 2) {
@@ -75,13 +67,10 @@ public class LogInStudentUseCase {
 					System.out.println("New password cannot be your current password...");
 					return;
 				}
-				String result =dao.changeStudentPassword(username,pass,newPassword2);
+				String result =dao.changeStudentPassword(username,pass,newPassword2); //update password method.
 				System.out.println(result);
 			}
-			
-			
-			
-			
+				
 		} catch (StudentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

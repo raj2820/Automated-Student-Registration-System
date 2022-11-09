@@ -24,22 +24,16 @@ String result = "Not Inserted..";
 			ps.setString(1, student.getName());
 			ps.setString(2, student.getUserName());
 			ps.setString(3, student.getPassword());
-			
-			
+				
 			int x= ps.executeUpdate();
 			
 			if(x >0)
 				result = "Student Registered Sucessfully ! ";
-				
-		
-			
+					
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new StudentException(e.getMessage());
 		}
-		
-		
-
 		return result;
 	}
 
@@ -57,8 +51,6 @@ String result = "Not Inserted..";
 	ResultSet rs =	ps.executeQuery()	;
 			
 	if(rs.next()) {
-		
-		
 	int r =	rs.getInt("roll");
 	String n =rs.getString("name");
 	String u = rs.getString("username");
@@ -75,10 +67,7 @@ String result = "Not Inserted..";
 			e.printStackTrace();
 			throw new StudentException(e.getMessage());
 		}
-		
-		
-		
-		
+
 		return student;
 	}
 
@@ -88,18 +77,18 @@ String result = "Not Inserted..";
 		
 		try (Connection conn =DBUtil.provideConnection()){
 			
-		PreparedStatement ps = conn.prepareStatement("select * from student where roll = ?");	
+		PreparedStatement ps = conn.prepareStatement("select * from student where roll = ?");	//SQL query to validate roll.
 		ps.setInt(1,roll);
 		ResultSet rs =	ps.executeQuery();
 			
 		if(rs.next()) {
-		PreparedStatement ps2 =	conn.prepareCall("select * from course where cid = ?");
+		PreparedStatement ps2 =	conn.prepareCall("select * from course where cid = ?"); //SQL query to validate cid.
 		ps2.setInt(1, cid);	
 	ResultSet rs2 =	ps.executeQuery();
 			
 	if(rs2.next()) {
 		
-	PreparedStatement ps3 = conn.prepareStatement("insert into student_course values(?,?)");
+	PreparedStatement ps3 = conn.prepareStatement("insert into student_course values(?,?)");//SQL query to insert values into the table student_course.
 	ps3.setInt(1, cid);
 	ps3.setInt(2,roll);
 	
@@ -115,22 +104,15 @@ String result = "Not Inserted..";
 		throw new CourseException("Invalid course ID...!");
 	}
 	
-			
 		}else {
 			throw new StudentException("Student not found...! ");
 		}
-			
-			
-			
-			
+	
 			
 		} catch (SQLException e) {
 			throw new CourseException();
 		}
-		
-		
-		
-		
+
 		return message;
 	}
 
@@ -139,18 +121,17 @@ String result = "Not Inserted..";
 		String message = "Password not updated .";
 		boolean flag=false;
 		try(Connection conn = DBUtil.provideConnection()) {
-		
 
-			PreparedStatement ps1 =conn.prepareStatement("select * from student where password = ? ");
+			PreparedStatement ps1 =conn.prepareStatement("select * from student where password = ? ");//SQL query to validate password.
 			ps1.setString(1,password);
 			ResultSet rs = ps1.executeQuery();
 			if(rs.next()) {
-				flag=true;
+				flag=true;  // Flag is needed because we cannot use excuteUpdate() inside ResultSet object variable;
 			}else {
 				message="incorrect password..!";
 			}
 			if(flag==true) {
-				PreparedStatement ps = conn.prepareStatement("update student set password = ?  where username = ?");
+				PreparedStatement ps = conn.prepareStatement("update student set password = ?  where username = ?");//SQL query to update password.
 				ps.setString(1, newPassword);
 				ps.setString(2,username);
 						int x =ps.executeUpdate();
@@ -163,11 +144,7 @@ String result = "Not Inserted..";
 		} catch (SQLException e) {
 			throw new StudentException(e.getMessage());
 		}
-		
-		
-		
-		
-		
+
 		return message;
 	}
 
