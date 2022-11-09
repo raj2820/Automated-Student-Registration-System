@@ -10,19 +10,13 @@ import com.masai.exception.StudentException;
 public class EnrollStudentUsecase {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-Scanner sc= new Scanner(System.in);
-		
-
-
+	Scanner sc= new Scanner(System.in);
 System.out.println("Enter Roll : ");
 int roll= sc.nextInt();
 	
 		System.out.println("Enter Course Id : ");
 		int cid= sc.nextInt();
-		
-		
+
 		StudentDao dao =new StudentDaoImpl();
 		try {
 			String result = dao.enrollStudentInCourse(roll,cid);
@@ -34,8 +28,5 @@ int roll= sc.nextInt();
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
-
 }

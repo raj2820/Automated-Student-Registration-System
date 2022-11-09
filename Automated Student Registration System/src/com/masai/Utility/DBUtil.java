@@ -21,7 +21,7 @@ String url ="jdbc:mysql://localhost:3306/asmsdb";
 try {
 	conn = DriverManager.getConnection(url, "root","root");
 } catch (SQLException e) {
-	// TODO Auto-generated catch block
+
 	e.printStackTrace();
 }
 		return conn;

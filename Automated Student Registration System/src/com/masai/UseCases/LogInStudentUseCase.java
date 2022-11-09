@@ -1,8 +1,5 @@
 package com.masai.UseCases;
-
-
 import java.util.Scanner;
-
 import com.masai.dao.StudentDao;
 import com.masai.dao.StudentDaoImpl;
 import com.masai.exception.CourseException;
@@ -15,16 +12,12 @@ public class LogInStudentUseCase {
 		// TODO Auto-generated method stub
 
 		Scanner sc= new Scanner(System.in);
-		
-
 
 		System.out.println("Enter Student username :");
 		String username= sc.next();
 	
 		System.out.println("Enter Password :");
 		String password= sc.next();
-		
-		
 		
 		StudentDao dao=	new StudentDaoImpl();
 		try {
@@ -45,8 +38,6 @@ public class LogInStudentUseCase {
 						System.out.println("Enter Course Id : ");
 						int cid= sc.nextInt();
 						
-						
-					
 						try {
 							String result = dao.enrollStudentInCourse(roll,cid);
 						System.out.println(result);
@@ -78,10 +69,7 @@ public class LogInStudentUseCase {
 				String result =dao.changeStudentPassword(username,pass,newPassword2);
 				System.out.println(result);
 			}
-			
-			
-			
-			
+				
 		} catch (StudentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
