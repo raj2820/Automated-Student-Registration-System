@@ -147,9 +147,7 @@ PreparedStatement ps = conn.prepareStatement("select s.roll,s.name,s.username"
 		throw new CourseException(e.getMessage());
 		}
 		
-		
-		
-		
+
 		return message;
 	}
 
@@ -175,10 +173,6 @@ PreparedStatement ps = conn.prepareStatement("select s.roll,s.name,s.username"
 		e.printStackTrace();
 		throw new CourseException(e.getMessage());
 	}
-	
-
-
-	
 	
 	return message;
 	
@@ -207,25 +201,20 @@ PreparedStatement ps = conn.prepareStatement("select s.roll,s.name,s.username"
 			
 		}
 		
-		
-		
-		
-		
-		
-		
+
 		return message;
 	}
 
 	@Override
-	public String createBatch(String batchname, int cid,  String date) throws CourseException {
+	public String createBatch(String batchname, int cid,  int size) throws CourseException {
 		String message = "Batch not created";
 		
 		try(Connection conn =DBUtil.provideConnection()) {
 			
-			PreparedStatement ps = conn.prepareStatement("update student_course set batchname = ? where cid = ? AND enrollmentDate >= ?");
+			PreparedStatement ps = conn.prepareStatement("insert into batch(batchname,cid,batchCapacity) values(?,?,?)");
 			ps.setString(1,batchname);
 			ps.setInt(2, cid);
-			ps.setString(3,date);
+			ps.setInt(3,size);
 			
 			int x = ps.executeUpdate(); 
 			
@@ -254,7 +243,7 @@ PreparedStatement ps = conn.prepareStatement("select s.roll,s.name,s.username"
 	public String updateBatchSize(String batchname , int size) throws CourseException {
 		String message = "Batch Size updated";
 			try(Connection conn =DBUtil.provideConnection()) {
-			PreparedStatement ps = conn.prepareStatement("update student_course set batchCapacity = ? where batchname = ?");
+			PreparedStatement ps = conn.prepareStatement("update batch set batchCapacity = ? where batchname = ?");
 			ps.setInt(1,size);	
 		ps.setString(2,batchname);
 		int x =ps.executeUpdate();
