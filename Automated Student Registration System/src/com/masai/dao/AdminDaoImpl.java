@@ -204,6 +204,7 @@ PreparedStatement ps = conn.prepareStatement("select s.roll,s.name,s.username"
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			
 		}
 		
 		
@@ -216,9 +217,57 @@ PreparedStatement ps = conn.prepareStatement("select s.roll,s.name,s.username"
 	}
 
 	@Override
-	public String createBatch(String batchName, int cid, int roll, String name) throws CourseException {
-		// TODO Auto-generated method stub
-		return null;
+	public String createBatch(String batchname, int cid,  String date) throws CourseException {
+		String message = "Batch not created";
+		
+		try(Connection conn =DBUtil.provideConnection()) {
+			
+			PreparedStatement ps = conn.prepareStatement("update student_course set batchname = ? where cid = ? AND enrollmentDate >= ?");
+			ps.setString(1,batchname);
+			ps.setInt(2, cid);
+			ps.setString(3,date);
+			
+			int x = ps.executeUpdate(); 
+			
+			if( x >0)
+				message= "Batch created";
+			else
+				message="Batch creation failed";
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			throw new CourseException(e.getMessage());
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		return message;
+	}
+
+	@Override
+	public String updateBatchSize(String batchname , int size) throws CourseException {
+		String message = "Batch Size updated";
+			try(Connection conn =DBUtil.provideConnection()) {
+			PreparedStatement ps = conn.prepareStatement("update student_course set batchCapacity = ? where batchname = ?");
+			ps.setInt(1,size);	
+		ps.setString(2,batchname);
+		int x =ps.executeUpdate();
+		if(x > 0)
+			message = "Size updated";
+		else
+			message = "Size not updated";		
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			throw new CourseException(e.getMessage());
+		}
+		return message;
 	}
 
 	

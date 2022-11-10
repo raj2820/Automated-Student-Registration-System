@@ -37,21 +37,24 @@ public class LogInStudentUseCase {
 			switch (x) {
 			case 1: {
 				System.out.println("Enter Roll : ");
-				int roll= sc.nextInt();
+				int roll=sc.nextInt();
+					System.out.println("Enter Course Id : ");
+					int cid= sc.nextInt();
+
+					System.out.println("Enter date (yyyymmdd) no extra characters");
+					String date = sc.next();
 					
-						System.out.println("Enter Course Id : ");
-						int cid= sc.nextInt();
-						
-						try {
-							String result = dao.enrollStudentInCourse(roll,cid); //Enrollment method.
-						System.out.println(result);
-						} catch (StudentException e) {
-						
-							e.printStackTrace();
-						} catch (CourseException e) {
-						
-							e.printStackTrace();
-						}
+				
+					try {
+						String result = dao.enrollStudentInCourse(roll,cid,date);
+					System.out.println(result);
+					} catch (StudentException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (CourseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 						break;
 				
 			}
