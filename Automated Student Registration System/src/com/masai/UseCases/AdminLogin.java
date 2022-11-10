@@ -35,7 +35,9 @@ public class AdminLogin {
 			System.out.println("Enter 2  to update fee of a course");
 			System.out.println("Enter 3 to Delete a course");
 			System.out.println("Enter 4 to Add a new course");
-			System.out.println("Enter 5 to log out");
+			System.out.println("Enter 5 to Create a new Batch");
+			System.out.println("Enter 6 to Update batch size");
+			System.out.println("Enter 7 to log out");
 	int z=sc.nextInt();
 			switch (z) {
 			case 1: {
@@ -122,8 +124,52 @@ public class AdminLogin {
 
 			}
 			case 5:{
+			
+				
+				System.out.println("Enter course-id ");
+				int cid = sc.nextInt();
+				
+				System.out.println("Enter batch name");
+				String bname= sc.next();
+				
+				System.out.println("Enter student enrollment date limit for batch creation");
+				
+				String date = sc.next();
+				
+				try {
+					
+					String res = dao.createBatch(bname, cid, date);
+					System.out.println(res);
+					
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+				
+				break;				
+			}
+			case 6:{
+
+				System.out.println("Enter batch name");
+				String bname = sc.next();
+				System.out.println(" Enter size");
+				int size = sc.nextInt();
+				try {
+			
+					String res = dao.updateBatchSize(bname, size);
+					System.out.println(res);
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+				
+				
+				break;
+			}
+			case 7 :{
+				
 				System.out.println("Logged out sucessfully.....!");
 				return;
+				
 			}
 			}
 		} catch (AdminException e) {

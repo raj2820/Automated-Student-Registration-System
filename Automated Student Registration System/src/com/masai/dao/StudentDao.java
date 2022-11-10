@@ -1,5 +1,6 @@
 package com.masai.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.masai.exception.CourseException;
@@ -12,7 +13,7 @@ public interface StudentDao {
 	
 	public Student studentSignIn(String username , String password) throws StudentException;
 	
-	public String enrollStudentInCourse(int roll ,int cid ) throws StudentException , CourseException;
+	public String enrollStudentInCourse(int roll ,int cid ,String date) throws StudentException , CourseException;
 	
 	public String changeStudentPassword(String username ,String password,String newPassword) throws StudentException;
 	
