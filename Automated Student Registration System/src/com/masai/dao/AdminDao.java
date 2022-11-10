@@ -16,6 +16,9 @@ public interface AdminDao {
 	public String updateFee(int cid , int fee) throws CourseException;
 	public String deleteCourse(int cid) throws CourseException;
 	public String addCourse(String cname,int fee,String duration);
-	public String createBatch(String batchname,int cid,String date) throws CourseException;
+	public String createBatch(String batchname , int cid , int size) throws CourseException;
 	public String updateBatchSize(String batchname,int size) throws CourseException;
+	
+	
+	
 }

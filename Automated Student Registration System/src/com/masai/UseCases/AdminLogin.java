@@ -17,6 +17,9 @@ public class AdminLogin {
 		// TODO Auto-generated method stub
 
 		Scanner sc= new Scanner(System.in);
+		
+		
+		System.out.println("Welcome to Adminstartor login");
 
 		System.out.println("Enter Admin username :");
 		String username= sc.next();
@@ -25,153 +28,16 @@ public class AdminLogin {
 		String password= sc.next();
 		
 		
-		AdminDao dao = new AdminDaoImpl();
+		
 		
 		try {
+			AdminDao dao = new AdminDaoImpl();
 			Admin admin = dao.adminSignin(username, password);
       System.out.println("Welcome "+admin.getAname().toUpperCase());
 			
-			System.out.println("Enter 1 to see Students enrolled in a course ");
-			System.out.println("Enter 2  to update fee of a course");
-			System.out.println("Enter 3 to Delete a course");
-			System.out.println("Enter 4 to Add a new course");
-			System.out.println("Enter 5 to Create a new Batch");
-			System.out.println("Enter 6 to Update batch size");
-			System.out.println("Enter 7 to log out");
-	int z=sc.nextInt();
-			switch (z) {
-			case 1: {
-				
-				System.out.println("Enetr course name to Get details of students :");
-				String cname = sc.next()	;
-
-
-				try {
-					List<AdminStudentCourseDTO> dtos = dao.getAllStudentsByCourseName(cname);
-
-
-				dtos.forEach(s->System.out.println(s));
-
-				} catch (CourseException e) {
-
-					e.printStackTrace();
-				}
-				
-				break;
-			}
-			case 2:{
-			
-				
-				
-				System.out.println("Enter course id");
-				int cid=sc.nextInt();
-				
-				System.out.println("Enter fee to be updated");
-				int fee = sc.nextInt();
-		
-			
-				try {
-				String res = dao.updateFee(cid, fee);
-				System.out.println(res);
-					
-					
-				} catch (CourseException e) {
-					e.printStackTrace();
-			
-				}
-				break;
-			}
-			case 3 :{
-				System.out.println("Enter the course id to be deleted");
-				int cid =sc.nextInt();
-				
-				
-			
-				
-				
-				try {
-					String res = dao.deleteCourse(cid);
-					System.out.println(res);
-				} catch (CourseException e) {
-					// TODO: handle exception
-					System.out.println(e.getMessage());
-				}
-				
-				
-				break;
-				
-			}
-			case 4:{
-				System.out.println("Enter course name");
-				String cname = sc.next();
-				
-				System.out.println("Enter course fee");
-				int fee=sc.nextInt();
-				
-				System.out.println("Enter course duration");
-				String duration =sc.next();
+     Adminoptions.main(args);
+      
 	
-				try {
-					
-				String res = dao.addCourse(cname, fee, duration)	;
-				System.out.println(res);
-					
-				} catch (Exception e) {
-					// TODO: handle exception
-				
-					System.out.println(e.getMessage());
-				}
-
-			}
-			case 5:{
-			
-				
-				System.out.println("Enter course-id ");
-				int cid = sc.nextInt();
-				
-				System.out.println("Enter batch name");
-				String bname= sc.next();
-				
-				System.out.println("Enter student enrollment date limit for batch creation");
-				
-				String date = sc.next();
-				
-				try {
-					
-					String res = dao.createBatch(bname, cid, date);
-					System.out.println(res);
-					
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-				}
-				
-				break;				
-			}
-			case 6:{
-
-				System.out.println("Enter batch name");
-				String bname = sc.next();
-				System.out.println(" Enter size");
-				int size = sc.nextInt();
-				try {
-			
-					String res = dao.updateBatchSize(bname, size);
-					System.out.println(res);
-				} catch (Exception e) {
-					// TODO: handle exception
-					e.printStackTrace();
-				}
-				
-				
-				break;
-			}
-			case 7 :{
-				
-				System.out.println("Logged out sucessfully.....!");
-				return;
-				
-			}
-			}
 		} catch (AdminException e) {
 			
 		
