@@ -16,6 +16,7 @@ static int adminChoices() {
 	System.out.println("Enter 4 to Add a new course");
 	System.out.println("Enter 5 to Create a new Batch");
 	System.out.println("Enter 6 to Update batch size");
+	System.out.println("Enter 8 to assign a batch to the student");
 	System.out.println("Enter 7 to log out");
 	int z=sc.nextInt();
 	return z;
@@ -179,12 +180,41 @@ static void adminSwitches(int z,AdminDao dao) {
 	}
 	case 7 :{
 		
+		System.out.println("Enter course id");
+		int cid =sc.nextInt();
+		
+		System.out.println("Enter Lower limit date");
+		String date1=sc.next();
+		
+		System.out.println("Enter Upper limit date");
+		String date2 =sc.next();
+		
+		System.out.println("Enter batch name ");
+		String batchname= sc.next();
+		
+		
+		try {
+			String res = dao.assignStudentsToBatch(cid, date1, date2, batchname);
+			System.out.println(res);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		
+		}
+		
+		
+	
+		return;
+		
+	}
+	case 8 :{
+		
 		System.out.println("Logged out sucessfully.....!");
 	
 		return;
 		
 	}
-	
 
 	
 	}
