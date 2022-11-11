@@ -16,7 +16,7 @@ System.out.println("Enter Roll : ");
 		System.out.println("Enter Course Id : ");
 		int cid= sc.nextInt();
 
-		System.out.println("Enter date (yyyymmdd) no extra characters");
+		System.out.println("Enter date (yyyymmdd) ");
 		String date = sc.next();
 		
 		StudentDao dao =new StudentDaoImpl();

@@ -34,6 +34,8 @@ Scanner sc= new Scanner(System.in);
 		String result= dao.registerStudent(student);
 		
 		System.out.println(result);
+		
+		LogInStudentUseCase.main(args);
 		}catch (StudentException e) {
 			System.out.println(e.getMessage());
 		}

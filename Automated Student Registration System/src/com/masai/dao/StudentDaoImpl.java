@@ -77,7 +77,7 @@ String result = "Not Inserted..";
 
 	@Override
 	public String enrollStudentInCourse(int roll, int cid ,String date) throws StudentException, CourseException {
-		String message= "Not enrolled....!";
+String message= "Not enrolled....!";
 		
 		try (Connection conn =DBUtil.provideConnection()){
 			
@@ -92,7 +92,7 @@ String result = "Not Inserted..";
 			
 	if(rs2.next()) {
 		
-	PreparedStatement ps3 = conn.prepareStatement("insert into student_course values(?,?,?)");//SQL query to insert values into the table student_course.
+	PreparedStatement ps3 = conn.prepareStatement("insert into student_course (cid,roll,enrollmentDate) values(?,?,?)");//SQL query to insert values into the table student_course.
 	ps3.setInt(1, cid);
 	ps3.setInt(2,roll);
 	ps3.setString(3,date);

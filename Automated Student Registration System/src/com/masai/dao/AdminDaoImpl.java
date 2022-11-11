@@ -259,5 +259,36 @@ PreparedStatement ps = conn.prepareStatement("select s.roll,s.name,s.username"
 		return message;
 	}
 
+	@Override
+	public String assignStudentsToBatch(int cid, String date1, String date2,String batchname) throws CourseException {
+	String message = "Student not assigned";
+	
+	try(Connection conn =DBUtil.provideConnection()) {
+		
+		PreparedStatement ps =conn.prepareStatement("update student_course set batchname = ? where cid = ? AND enrollmentdate >= ? AND enrollmentdate <= ?");
+		ps.setString(1,batchname);
+		ps.setInt(2, cid);
+		ps.setString(3, date1);
+		ps.setString(4,date2);
+		
+		
+		int x= ps.executeUpdate();
+		if(x > 0) {
+			message = "Student assigned to the batch :" + " " +batchname;
+		}else
+			message = "Student not assigned";
+		
+
+	} catch (SQLException e) {
+		// TODO: handle exception
+		e.printStackTrace();
+		throw new CourseException();
+	}
+	
+	
+	
+	return message;
+	}
+
 	
 }
