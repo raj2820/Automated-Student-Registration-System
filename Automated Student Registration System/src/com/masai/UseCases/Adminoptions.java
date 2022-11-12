@@ -2,6 +2,8 @@ package com.masai.UseCases;
 
 import java.util.List;
 import java.util.Scanner;
+
+import com.masai.Application.AutomatedStudentRegistrationSystem;
 import com.masai.dao.AdminDao;
 import com.masai.dao.AdminDaoImpl;
 import com.masai.exception.CourseException;
@@ -16,8 +18,8 @@ static int adminChoices() {
 	System.out.println("Enter 4 to Add a new course");
 	System.out.println("Enter 5 to Create a new Batch");
 	System.out.println("Enter 6 to Update batch size");
-	System.out.println("Enter 8 to assign a batch to the student");
-	System.out.println("Enter 7 to log out");
+	System.out.println("Enter 7 to assign a batch to the student");
+	System.out.println("Enter 8 to log out");
 	int z=sc.nextInt();
 	return z;
 }
@@ -211,7 +213,7 @@ static void adminSwitches(int z,AdminDao dao) {
 	case 8 :{
 		
 		System.out.println("Logged out sucessfully.....!");
-	
+	AutomatedStudentRegistrationSystem.main(null);
 		return;
 		
 	}
