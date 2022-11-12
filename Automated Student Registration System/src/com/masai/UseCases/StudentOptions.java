@@ -15,6 +15,9 @@ public class StudentOptions {
 static int studentChoices() {
 	
 	Scanner sc=new Scanner(System.in);
+	
+	System.out.println("\n");
+	System.out.println("*********************************Student's main menu***********************");
 	System.out.println("Enter 1 for course enrollment ");
 	
 	System.out.println("Enter 2 for updating password ");
@@ -95,13 +98,12 @@ System.out.println("Enter current password");
 
 		try {
 			 List<StudentStudentCourseDTO> dtos = dao.getAllCourseInfo();
-			 dtos.forEach(s->System.out.println(s));
+			 dtos.forEach(s->System.out.println("Course Id : "+s.getCid()+"\n"+"Course name : "+s.getCname()+"\n"+"Course Fee : " +s.getFee()+"\n"+"==================================="));
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		System.out.println("\n");
-		System.out.println("===================================================");
+		
 		System.out.println("\n");
 		studentOptionsContainer();
 		break;
