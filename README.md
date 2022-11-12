@@ -6,6 +6,8 @@
 •	Students.
  </p>
 
+<h1 align="center">Entity Relationship Diagram</h1>
+
 <img src="asmsdbSchema.png">
 
 
