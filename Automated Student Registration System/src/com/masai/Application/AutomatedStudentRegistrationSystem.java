@@ -14,7 +14,9 @@ public class AutomatedStudentRegistrationSystem {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 Scanner sc =new Scanner(System.in);
-
+System.out.println("\n");
+System.out.println("**********************************Home Page**************************************");
+System.out.println("\n");
 System.out.println("Enter 1 for Admin login");
 System.out.println("Enter 2 for register as a Admin");
 System.out.println("Enter 3 to for student login");
