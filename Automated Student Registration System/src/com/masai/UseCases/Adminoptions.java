@@ -7,6 +7,7 @@ import com.masai.Application.AutomatedStudentRegistrationSystem;
 import com.masai.dao.AdminDao;
 import com.masai.dao.AdminDaoImpl;
 import com.masai.exception.CourseException;
+import com.masai.model.AdminBatchDTO;
 import com.masai.model.AdminStudentCourseDTO;
 
 public class Adminoptions {
@@ -19,7 +20,8 @@ static int adminChoices() {
 	System.out.println("Enter 5 to Create a new Batch");
 	System.out.println("Enter 6 to Update batch size");
 	System.out.println("Enter 7 to assign a batch to the student");
-	System.out.println("Enter 8 to log out");
+	System.out.println("Enter 8 to see Students assigned in all batches");
+	System.out.println("Enter 9 to log out");
 	int z=sc.nextInt();
 	return z;
 }
@@ -39,15 +41,29 @@ static void adminSwitches(int z,AdminDao dao) {
 			List<AdminStudentCourseDTO> dtos = dao.getAllStudentsByCourseName(cname);
 
 
-		dtos.forEach(s->System.out.println(s));
+		dtos.forEach(s->System.out.println("Student Name : "+s.getSname()+"\n"+"Roll number : "+s.getRoll()+"\n"+"Course Name"+s.getCname()+"\n"+"Course duration : "+s.getDuration()+"\n"+"========================================================"));
 
 		} catch (CourseException e) {
 
 			e.printStackTrace();
 		}
+		
 		System.out.println("\n");
-		System.out.println("===================================================");
-		System.out.println("\n");
+		
+		System.out.println("Enter 1 to go main menu");
+		System.out.println("Enter 2 to log out");
+		int g =sc.nextInt();
+		switch(g) {
+		case 1 :{
+			AdminoptionContainer();
+			break;
+		}
+		case 2:{
+			System.out.println("Logged out sucessfully.....!");
+			AutomatedStudentRegistrationSystem.main(null);
+			return;
+		}
+		}
 		AdminoptionContainer();
 		break;
 	}
@@ -74,7 +90,20 @@ static void adminSwitches(int z,AdminDao dao) {
 		System.out.println("\n");
 		System.out.println("===================================================");
 		System.out.println("\n");
-		
+		System.out.println("Enter 1 to go main menu");
+		System.out.println("Enter 2 to log out");
+		int g =sc.nextInt();
+		switch(g) {
+		case 1 :{
+			AdminoptionContainer();
+			break;
+		}
+		case 2:{
+			System.out.println("Logged out sucessfully.....!");
+			AutomatedStudentRegistrationSystem.main(null);
+			return;
+		}
+		}
 		AdminoptionContainer();
 		
 		break;
@@ -94,7 +123,20 @@ static void adminSwitches(int z,AdminDao dao) {
 		System.out.println("\n");
 		System.out.println("===================================================");
 		System.out.println("\n");
-		
+		System.out.println("Enter 1 to go main menu");
+		System.out.println("Enter 2 to log out");
+		int g =sc.nextInt();
+		switch(g) {
+		case 1 :{
+			AdminoptionContainer();
+			break;
+		}
+		case 2:{
+			System.out.println("Logged out sucessfully.....!");
+			AutomatedStudentRegistrationSystem.main(null);
+			return;
+		}
+		}
 		AdminoptionContainer();
 		break;
 		
@@ -122,6 +164,20 @@ static void adminSwitches(int z,AdminDao dao) {
 		System.out.println("\n");
 		System.out.println("===================================================");
 		System.out.println("\n");
+		System.out.println("Enter 1 to go main menu");
+		System.out.println("Enter 2 to log out");
+		int g =sc.nextInt();
+		switch(g) {
+		case 1 :{
+			AdminoptionContainer();
+			break;
+		}
+		case 2:{
+			System.out.println("Logged out sucessfully.....!");
+			AutomatedStudentRegistrationSystem.main(null);
+			return;
+		}
+		}
 		AdminoptionContainer();
 		break;
 	}
@@ -149,6 +205,20 @@ static void adminSwitches(int z,AdminDao dao) {
 		System.out.println("\n");
 		System.out.println("===================================================");
 		System.out.println("\n");
+		System.out.println("Enter 1 to go main menu");
+		System.out.println("Enter 2 to log out");
+		int g =sc.nextInt();
+		switch(g) {
+		case 1 :{
+			AdminoptionContainer();
+			break;
+		}
+		case 2:{
+			System.out.println("Logged out sucessfully.....!");
+			AutomatedStudentRegistrationSystem.main(null);
+			return;
+		}
+		}
 		AdminoptionContainer();
 		
 		break;				
@@ -177,6 +247,20 @@ static void adminSwitches(int z,AdminDao dao) {
 		System.out.println("\n");
 		System.out.println("===================================================");
 		System.out.println("\n");
+		System.out.println("Enter 1 to go main menu");
+		System.out.println("Enter 2 to log out");
+		int g =sc.nextInt();
+		switch(g) {
+		case 1 :{
+			AdminoptionContainer();
+			break;
+		}
+		case 2:{
+			System.out.println("Logged out sucessfully.....!");
+			AutomatedStudentRegistrationSystem.main(null);
+			return;
+		}
+		}
 		AdminoptionContainer();
 		break;
 	}
@@ -205,12 +289,51 @@ static void adminSwitches(int z,AdminDao dao) {
 		
 		}
 		
-		
-	
-		return;
+		System.out.println("\n");
+		System.out.println("===================================================");
+		System.out.println("\n");
+		System.out.println("Enter 1 to go main menu");
+		System.out.println("Enter 2 to log out");
+		int g =sc.nextInt();
+		switch(g) {
+		case 1 :{
+			AdminoptionContainer();
+			break;
+		}
+		case 2:{
+			System.out.println("Logged out sucessfully.....!");
+			AutomatedStudentRegistrationSystem.main(null);
+			return;
+		}
+		}
+		AdminoptionContainer();
+		break;
 		
 	}
-	case 8 :{
+	case 8: {
+		
+		
+		System.out.println("\n");
+
+		
+		System.out.println("Enter 1 to go main menu");
+		System.out.println("Enter 2 to log out");
+		int g =sc.nextInt();
+		switch(g) {
+		case 1 :{
+			AdminoptionContainer();
+			break;
+		}
+		case 2:{
+			System.out.println("Logged out sucessfully.....!");
+			AutomatedStudentRegistrationSystem.main(null);
+			return;
+		}
+		}
+		AdminoptionContainer();
+		break;
+	}
+	case 9 :{
 		
 		System.out.println("Logged out sucessfully.....!");
 	AutomatedStudentRegistrationSystem.main(null);

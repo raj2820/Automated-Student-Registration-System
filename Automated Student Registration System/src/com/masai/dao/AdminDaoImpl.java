@@ -12,8 +12,10 @@ import com.masai.exception.AdminException;
 import com.masai.exception.CourseException;
 import com.masai.exception.StudentException;
 import com.masai.model.Admin;
+import com.masai.model.AdminBatchDTO;
 import com.masai.model.AdminStudentCourseDTO;
 import com.masai.model.Course;
+import com.mysql.cj.xdevapi.Result;
 
 public class AdminDaoImpl implements AdminDao{
 
@@ -26,7 +28,7 @@ public class AdminDaoImpl implements AdminDao{
 			
 			
 PreparedStatement ps = conn.prepareStatement("select s.roll,s.name,s.username"
-		+ ",c.cname,c.duration from student s INNER JOIN course c INNER JOIN student_course sc ON s.roll=sc.roll "
+		+ ",c.cname,c.duration from student s INNER JOIN course c INNER JOIN student_cours sc ON s.roll=sc.roll "
 		+ "AND c.cid=sc.cid AND c.cname = ?");
 			
 			ps.setString(1, cname);
@@ -68,18 +70,36 @@ PreparedStatement ps = conn.prepareStatement("select s.roll,s.name,s.username"
 		
 		
 		try (Connection conn= DBUtil.provideConnection()){
-			PreparedStatement ps=conn.prepareStatement("insert into admin(aname,username,password) values(?,?,?)");
-			ps.setString(1,admin.getAname());
-			ps.setString(2,admin.getUsername());
-			ps.setString(3,admin.getPassword());
 			
 			
-			int x =ps.executeUpdate();
-			if(x>0) {
-				message = "admin registered sucessfully";
-			}else {
-				message = "Registration failed";
+			PreparedStatement ps1=conn.prepareStatement("select * from admin where username = ?");
+			ps1.setString(1,admin.getUsername());
+			
+			ResultSet rs =ps1.executeQuery();
+			
+			if(rs.next()) {
+				System.out.println("username already registered");
+			
+			throw new AdminException("Username already registered");
+			
 			}
+			else {
+
+				PreparedStatement ps=conn.prepareStatement("insert into admin(aname,username,password) values(?,?,?)");
+				ps.setString(1,admin.getAname());
+				ps.setString(2,admin.getUsername());
+				ps.setString(3,admin.getPassword());
+				
+				
+				int x =ps.executeUpdate();
+				if(x>0) {
+					message = "admin registered sucessfully";
+				}else {
+					message = "Registration failed";
+				}
+			}
+			
+			
 
 			
 		} catch (SQLException e) {
@@ -211,7 +231,7 @@ PreparedStatement ps = conn.prepareStatement("select s.roll,s.name,s.username"
 		
 		try(Connection conn =DBUtil.provideConnection()) {
 			
-			PreparedStatement ps = conn.prepareStatement("insert into batch(batchname,cid,batchCapacity) values(?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("insert into batch(batchname,cid,seats) values(?,?,?)");
 			ps.setString(1,batchname);
 			ps.setInt(2, cid);
 			ps.setInt(3,size);
@@ -240,11 +260,11 @@ PreparedStatement ps = conn.prepareStatement("select s.roll,s.name,s.username"
 	}
 
 	@Override
-	public String updateBatchSize(String batchname , int size) throws CourseException {
+	public String updateBatchSize(String batchname , int seats) throws CourseException {
 		String message = "Batch Size updated";
 			try(Connection conn =DBUtil.provideConnection()) {
-			PreparedStatement ps = conn.prepareStatement("update batch set batchCapacity = ? where batchname = ?");
-			ps.setInt(1,size);	
+			PreparedStatement ps = conn.prepareStatement("update batch set seats = ? where batchname = ?");
+			ps.setInt(1,seats);	
 		ps.setString(2,batchname);
 		int x =ps.executeUpdate();
 		if(x > 0)
@@ -265,19 +285,57 @@ PreparedStatement ps = conn.prepareStatement("select s.roll,s.name,s.username"
 	
 	try(Connection conn =DBUtil.provideConnection()) {
 		
-		PreparedStatement ps =conn.prepareStatement("update student_course set batchname = ? where cid = ? AND enrollmentdate >= ? AND enrollmentdate <= ?");
-		ps.setString(1,batchname);
-		ps.setInt(2, cid);
-		ps.setString(3, date1);
-		ps.setString(4,date2);
 		
+		PreparedStatement ps2 =conn.prepareStatement("select bid from batch where batchname = ? ");
+		ps2.setString(1,batchname);
 		
-		int x= ps.executeUpdate();
-		if(x > 0) {
-			message = "Student assigned to the batch :" + " " +batchname;
-		}else
+		ResultSet rs1 =ps2.executeQuery();
+		if(rs1.next()) {
+			
+		
+			
+			PreparedStatement ps1 =conn.prepareStatement("select roll  from student_cours where cid = ? AND enrollmentDate >= ? AND enrollmentDate <= ?");
+			ps1.setInt(1, cid);
+			ps1.setString(2,date1);
+			ps1.setString(3,date2);
+			ResultSet rs =ps1.executeQuery();
+			List<Integer> li1=new ArrayList<>();
+			while(rs.next()) {
+				
+				List<Integer> li=new ArrayList<>();
+				li.add(rs.getInt("roll"));
+				li1.addAll(li);
+			}
+	int k=	li1.size();
+		for(int i=0;i<k;i++) {
+			PreparedStatement ps =conn.prepareStatement(" insert into student_batch (roll,cid,bid) values (?,?,?)");
+			ps.setInt(1,li1.get(i));
+			ps.setInt(2, cid);
+			ps.setInt(3, rs1.getInt("bid"));
+			
+		
+			
+				
+				
+				
+				int x= ps.executeUpdate();
+				if(x > 0) {
+				message = "Student assigned to the batch ";
+				
+			}else
 			message = "Student not assigned";
+
+		}
+			
+		}
 		
+		
+	
+
+		
+		
+		
+
 
 	} catch (SQLException e) {
 		// TODO: handle exception
@@ -288,6 +346,40 @@ PreparedStatement ps = conn.prepareStatement("select s.roll,s.name,s.username"
 	
 	
 	return message;
+	}
+
+	@Override
+	public List<AdminBatchDTO> getStudentsInAllBatches()  {
+		List<AdminBatchDTO> dtos = new ArrayList<>();
+		
+		try(Connection conn=DBUtil.provideConnection()) {
+		PreparedStatement ps =conn.prepareStatement("select s.name,s.roll,c.cid,c.cname,b.batchname,b.seats,b.bid FROM student s INNER JOIN course c INNER JOIN batch b INNER JOIN student_batch sc where sc.cid = c.cid AND s.roll=sc.roll AND b.bid=sc.bid");	
+			
+		ResultSet rs=ps.executeQuery();
+		while(rs.next()) {
+			AdminBatchDTO dto =new AdminBatchDTO();
+			dto.setSname(rs.getString("name"));
+			dto.setRoll(rs.getInt("roll"));
+dto.setCid(rs.getInt("cid"));
+dto.setCname(rs.getString("cname"));
+dto.setBatchname(rs.getString("batchname"));
+dto.setSeats(rs.getInt("seats"));
+dto.setBid(rs.getInt("bid"));
+
+dtos.add(dto);
+		}
+//		if(dtos.size()==0) {
+//			throw new CourseException("No student in that course");
+//		}
+		
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		
+		
+		return dtos;
 	}
 
 	

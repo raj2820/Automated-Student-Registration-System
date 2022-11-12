@@ -20,7 +20,7 @@ System.out.println("\n");
 System.out.println("Enter 1 for Admin login");
 System.out.println("Enter 2 for register as a Admin");
 System.out.println("Enter 3 to for student login");
-	System.out.println("Enter 4 to register as student");	
+System.out.println("Enter 4 to register as student");	
 		
 		int x =sc.nextInt();
 		

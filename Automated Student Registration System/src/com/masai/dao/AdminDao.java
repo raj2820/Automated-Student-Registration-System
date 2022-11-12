@@ -5,6 +5,7 @@ import java.util.List;
 import com.masai.exception.AdminException;
 import com.masai.exception.CourseException;
 import com.masai.model.Admin;
+import com.masai.model.AdminBatchDTO;
 import com.masai.model.AdminStudentCourseDTO;
 
 public interface AdminDao {
@@ -19,6 +20,6 @@ public interface AdminDao {
 	public String createBatch(String batchname , int cid , int size) throws CourseException;
 	public String updateBatchSize(String batchname,int size) throws CourseException;
 	public String assignStudentsToBatch(int cid,String date1,String date2,String batchname) throws CourseException;
-	
+	public List<AdminBatchDTO> getStudentsInAllBatches();
 	
 }

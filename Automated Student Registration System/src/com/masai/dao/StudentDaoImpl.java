@@ -22,17 +22,30 @@ public class StudentDaoImpl implements StudentDao{
 String result = "Not Inserted..";
 		
 		try(Connection conn= DBUtil.provideConnection()) {
+		
+			PreparedStatement ps1 =conn.prepareStatement("Select * from student where username = ?");
+			ps1.setString(1,student.getUserName());
+			ResultSet rs =ps1.executeQuery();
 			
-			PreparedStatement ps= conn.prepareStatement("insert into student(name,username,password) values(?,?,?)");
+			if(rs.next()) {
+			throw new StudentException("Username already registered ");
+
+			}
 			
-			ps.setString(1, student.getName());
-			ps.setString(2, student.getUserName());
-			ps.setString(3, student.getPassword());
+			else {
+				PreparedStatement ps= conn.prepareStatement("insert into student(name,username,password) values(?,?,?)");
 				
-			int x= ps.executeUpdate();
+				ps.setString(1, student.getName());
+				ps.setString(2, student.getUserName());
+				ps.setString(3, student.getPassword());
+					
+				int x= ps.executeUpdate();
+				
+				if(x >0)
+					result = "Student Registered Sucessfully ! ";
+			}
 			
-			if(x >0)
-				result = "Student Registered Sucessfully ! ";
+		
 					
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -92,7 +105,7 @@ String message= "Not enrolled....!";
 			
 	if(rs2.next()) {
 		
-	PreparedStatement ps3 = conn.prepareStatement("insert into student_course (cid,roll,enrollmentDate) values(?,?,?)");//SQL query to insert values into the table student_course.
+	PreparedStatement ps3 = conn.prepareStatement("insert into student_cours values(?,?,?)");//SQL query to insert values into the table student_course.
 	ps3.setInt(1, cid);
 	ps3.setInt(2,roll);
 	ps3.setString(3,date);
@@ -159,9 +172,7 @@ String message= "Not enrolled....!";
 		 
 		 try(Connection conn = DBUtil.provideConnection()) {
 			
-			PreparedStatement ps=conn.prepareStatement(" select c.cid,c.cname,c.fee ,c.duration,"
-					+ " count(s.roll) Total_Students from course c INNER JOIN student s INNER JOIN student_course sc where "
-					+ "s.roll=sc.roll AND c.cid=sc.cid group by c.cid;"); 
+			PreparedStatement ps=conn.prepareStatement(" select cid,cname,fee from course"); 
 			 
 			ResultSet rs =ps.executeQuery();
 			
@@ -169,15 +180,15 @@ String message= "Not enrolled....!";
 			StudentStudentCourseDTO dto =new StudentStudentCourseDTO();
 			dto.setCid(rs.getInt("cid"));
 			dto.setCname(rs.getString("cname"));
-			dto.setDuration(rs.getString("duration"));
+		
 			dto.setFee(rs.getInt("fee"));
-			dto.setTotal_students(rs.getInt("total_students"));
+		
 			
 			
 			dtos.add(dto);
 			}
 			if(dtos.size()==0) {
-				throw new CourseException("No student in that course");
+				throw new CourseException("No course available ");
 			}
 			 
 			 
