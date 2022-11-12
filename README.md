@@ -6,10 +6,7 @@
 •	Students.
  </p>
 
+<img src="asmsdbSchema.png">
 
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> acb950fd4f37f376e6f8c48c6b6c11b84b87f5e1
