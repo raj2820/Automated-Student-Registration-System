@@ -1,6 +1,6 @@
 package com.masai.UseCases;
 
-import java.sql.SQLException;
+
 import java.util.Scanner;
 
 import com.masai.dao.AdminDao;
@@ -22,11 +22,13 @@ public class AddCourseUseCase {
 		int fee=sc.nextInt();
 		
 		System.out.println("Enter course duration");
-		String duration =sc.next();
+		String duration =sc.nextLine();
+		duration = sc.nextLine();
 		
 		AdminDao dao = new AdminDaoImpl();
 		
 		
+
 		try {
 			
 		String res = dao.addCourse(cname, fee, duration)	;
@@ -37,7 +39,6 @@ public class AddCourseUseCase {
 		
 			System.out.println(e.getMessage());
 		}
-		
 		
 		
 	}

@@ -28,6 +28,7 @@ public class AssignBatchToStudentUseCase {
 		
 		AdminDao dao =new AdminDaoImpl();
 		
+		
 		try {
 			String res = dao.assignStudentsToBatch(cid, date1, date2, batchname);
 			System.out.println(res);
@@ -37,7 +38,6 @@ public class AssignBatchToStudentUseCase {
 			e.printStackTrace();
 		
 		}
-		
 		
 		
 		

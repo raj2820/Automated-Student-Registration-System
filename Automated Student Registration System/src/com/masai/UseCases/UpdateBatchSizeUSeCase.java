@@ -22,10 +22,19 @@ public class UpdateBatchSizeUSeCase {
 		
 		AdminDao dao = new AdminDaoImpl();
 		
+
+	
 		try {
 	
 			String res = dao.updateBatchSize(bname, size);
 			System.out.println(res);
+			
+			int d=0;
+			
+			if(d == 1) {
+				
+			}
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

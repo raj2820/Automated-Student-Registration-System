@@ -4,8 +4,9 @@ import java.util.Scanner;
 
 import com.masai.dao.AdminDao;
 import com.masai.dao.AdminDaoImpl;
+import com.masai.exception.CourseException;
 
-public class FeeUpdate {
+public class FeeUpdateUseCase {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -19,14 +20,17 @@ public class FeeUpdate {
 		int fee = sc.nextInt();
 		AdminDao dao =new AdminDaoImpl();
 		
-		
+	
+
+	
 		try {
 		String res = dao.updateFee(cid, fee);
 		System.out.println(res);
 			
 			
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (CourseException e) {
+			e.printStackTrace();
+	
 		}
 		
 		

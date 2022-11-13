@@ -5,7 +5,7 @@ import java.util.Scanner;
 import com.masai.dao.AdminDao;
 import com.masai.dao.AdminDaoImpl;
 
-public class CreateNewBatch {
+public class CreateNewBatchUseCase {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -29,6 +29,7 @@ public class CreateNewBatch {
 		
 		
 		
+
 		try {
 			
 			String res = dao.createBatch(bname, cid, size);
@@ -37,7 +38,6 @@ public class CreateNewBatch {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
 		
 		
 		

@@ -34,25 +34,7 @@ static void studentSwitches(int x) {
 	StudentDao dao = new StudentDaoImpl();
 	switch (x) {
 	case 1: {
-		System.out.println("Enter Roll : ");
-		int roll=sc.nextInt();
-			System.out.println("Enter Course Id : ");
-			int cid= sc.nextInt();
-
-			System.out.println("Enter date (yyyymmdd) no extra characters");
-			String date = sc.next();
-			
-		
-			try {
-				String result = dao.enrollStudentInCourse(roll,cid,date);
-			System.out.println(result);
-			} catch (StudentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (CourseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		EnrollStudentUsecase.main(null);
 			System.out.println("\n");
 			System.out.println("===================================================");
 			System.out.println("\n");
@@ -74,11 +56,15 @@ System.out.println("Enter current password");
 		
 		if(!newPassword.equals(newPassword2)) {
 			System.out.println("Password does not match...!");
+			System.out.println("\n");
+			studentOptionsContainer();
 			return;
 		}
 		if(newPassword.equals(pass)) {
 		
 			System.out.println("New password cannot be your current password...");
+			System.out.println("\n");
+			studentOptionsContainer();
 			return;
 		}
 		String result;
@@ -96,13 +82,7 @@ System.out.println("Enter current password");
 		break;
 	}case 3:{
 
-		try {
-			 List<StudentStudentCourseDTO> dtos = dao.getAllCourseInfo();
-			 dtos.forEach(s->System.out.println("Course Id : "+s.getCid()+"\n"+"Course name : "+s.getCname()+"\n"+"Course Fee : " +s.getFee()+"\n"+"==================================="));
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+		GetCourseInformationForStudents.main(null);
 		
 		System.out.println("\n");
 		studentOptionsContainer();
