@@ -20,7 +20,7 @@ public class GetCourseInformationForStudents {
 		
 		try {
 			 List<StudentStudentCourseDTO> dtos = dao.getAllCourseInfo();
-			 dtos.forEach(s->System.out.println(s));
+			 dtos.forEach(s->System.out.println("Course Id : "+s.getCid()+"\n"+"Course name : "+s.getCname()+"\n"+"Course Fee : " +s.getFee()+"\n"+"==================================="));
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

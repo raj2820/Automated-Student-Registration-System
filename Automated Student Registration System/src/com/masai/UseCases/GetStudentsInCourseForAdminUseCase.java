@@ -12,25 +12,22 @@ public class GetStudentsInCourseForAdminUseCase {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
-		Scanner sc =new Scanner(System.in);
-		
+Scanner sc =new Scanner(System.in);
+AdminDao dao =new AdminDaoImpl();
 		System.out.println("Enetr course name to Get details of students :");
-String cname = sc.next()	;
+		String cname = sc.next()	;
 
 
-AdminDao dao = new AdminDaoImpl();
-
-try {
-	List<AdminStudentCourseDTO> dtos = dao.getAllStudentsByCourseName(cname);
+		try {
+			List<AdminStudentCourseDTO> dtos = dao.getAllStudentsByCourseName(cname);
 
 
-dtos.forEach(s->System.out.println(s));
+		dtos.forEach(s->System.out.println("Student Name : "+s.getSname()+"\n"+"Roll number : "+s.getRoll()+"\n"+"Course Name"+s.getCname()+"\n"+"Course duration : "+s.getDuration()+"\n"+"========================================================"));
 
-} catch (CourseException e) {
+		} catch (CourseException e) {
 
-	e.printStackTrace();
-}
+			e.printStackTrace();
+		}
 
 
 		

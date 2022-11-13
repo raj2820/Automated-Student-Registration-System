@@ -4,8 +4,7 @@ public class StudentStudentCourseDTO {
  private int cid;
  private String cname;
  private int fee;
-// private String duration;
-// private int total_students;
+
  
  public int getCid() {
 	return cid;

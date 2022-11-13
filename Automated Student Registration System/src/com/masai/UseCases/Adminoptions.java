@@ -33,20 +33,7 @@ static void adminSwitches(int z,AdminDao dao) {
 	switch (z) {
 	case 1: {
 		
-		System.out.println("Enetr course name to Get details of students :");
-		String cname = sc.next()	;
-
-
-		try {
-			List<AdminStudentCourseDTO> dtos = dao.getAllStudentsByCourseName(cname);
-
-
-		dtos.forEach(s->System.out.println("Student Name : "+s.getSname()+"\n"+"Roll number : "+s.getRoll()+"\n"+"Course Name"+s.getCname()+"\n"+"Course duration : "+s.getDuration()+"\n"+"========================================================"));
-
-		} catch (CourseException e) {
-
-			e.printStackTrace();
-		}
+		GetStudentsInCourseForAdminUseCase.main(null);
 		
 		System.out.println("\n");
 		
@@ -71,22 +58,7 @@ static void adminSwitches(int z,AdminDao dao) {
 	
 		
 		
-		System.out.println("Enter course id");
-		int cid=sc.nextInt();
-		
-		System.out.println("Enter fee to be updated");
-		int fee = sc.nextInt();
-
-	
-		try {
-		String res = dao.updateFee(cid, fee);
-		System.out.println(res);
-			
-			
-		} catch (CourseException e) {
-			e.printStackTrace();
-	
-		}
+		FeeUpdateUseCase.main(null);
 		System.out.println("\n");
 		System.out.println("===================================================");
 		System.out.println("\n");
@@ -109,17 +81,7 @@ static void adminSwitches(int z,AdminDao dao) {
 		break;
 	}
 	case 3 :{
-		System.out.println("Enter the course id to be deleted");
-		int cid =sc.nextInt();
-
-		
-		try {
-			String res = dao.deleteCourse(cid);
-			System.out.println(res);
-		} catch (CourseException e) {
-			// TODO: handle exception
-			System.out.println(e.getMessage());
-		}
+		DeleteCourseUseCase.main(null);
 		System.out.println("\n");
 		System.out.println("===================================================");
 		System.out.println("\n");
@@ -142,25 +104,7 @@ static void adminSwitches(int z,AdminDao dao) {
 		
 	}
 	case 4:{
-		System.out.println("Enter course name");
-		String cname = sc.next();
-		
-		System.out.println("Enter course fee");
-		int fee=sc.nextInt();
-		
-		System.out.println("Enter course duration");
-		String duration =sc.next();
-
-		try {
-			
-		String res = dao.addCourse(cname, fee, duration)	;
-		System.out.println(res);
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		
-			System.out.println(e.getMessage());
-		}
+		AddCourseUseCase.main(null);
 		System.out.println("\n");
 		System.out.println("===================================================");
 		System.out.println("\n");
@@ -184,24 +128,7 @@ static void adminSwitches(int z,AdminDao dao) {
 	case 5:{
 	
 		
-		System.out.println("Enter course-id ");
-		int cid = sc.nextInt();
-		
-		System.out.println("Enter batch name");
-		String bname= sc.next();
-		
-		System.out.println("Enter batch size");
-		
-		int size = sc.nextInt();
-
-		try {
-			
-			String res = dao.createBatch(bname, cid, size);
-			System.out.println(res);
-			
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+		CreateNewBatchUseCase.main(null);
 		System.out.println("\n");
 		System.out.println("===================================================");
 		System.out.println("\n");
@@ -224,26 +151,7 @@ static void adminSwitches(int z,AdminDao dao) {
 		break;				
 	}
 	case 6:{
-
-		System.out.println("Enter batch name");
-		String bname = sc.next();
-		System.out.println(" Enter size");
-		int size = sc.nextInt();
-		try {
-	
-			String res = dao.updateBatchSize(bname, size);
-			System.out.println(res);
-			
-			int d=0;
-			
-			if(d == 1) {
-				
-			}
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+		UpdateBatchSizeUSeCase.main(null);
 		System.out.println("\n");
 		System.out.println("===================================================");
 		System.out.println("\n");
@@ -266,28 +174,7 @@ static void adminSwitches(int z,AdminDao dao) {
 	}
 	case 7 :{
 		
-		System.out.println("Enter course id");
-		int cid =sc.nextInt();
-		
-		System.out.println("Enter Lower limit date");
-		String date1=sc.next();
-		
-		System.out.println("Enter Upper limit date");
-		String date2 =sc.next();
-		
-		System.out.println("Enter batch name ");
-		String batchname= sc.next();
-		
-		
-		try {
-			String res = dao.assignStudentsToBatch(cid, date1, date2, batchname);
-			System.out.println(res);
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		
-		}
+		AssignBatchToStudentUseCase.main(null);
 		
 		System.out.println("\n");
 		System.out.println("===================================================");
@@ -311,7 +198,7 @@ static void adminSwitches(int z,AdminDao dao) {
 		
 	}
 	case 8: {
-		
+		GetAllBatchDetails.main(null);
 		
 		System.out.println("\n");
 

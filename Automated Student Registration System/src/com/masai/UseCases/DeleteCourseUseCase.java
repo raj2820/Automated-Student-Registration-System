@@ -19,6 +19,7 @@ public class DeleteCourseUseCase {
 		
 		AdminDao dao = new AdminDaoImpl();
 		
+
 		
 		try {
 			String res = dao.deleteCourse(cid);

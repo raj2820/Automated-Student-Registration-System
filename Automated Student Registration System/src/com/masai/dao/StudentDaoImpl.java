@@ -19,9 +19,9 @@ public class StudentDaoImpl implements StudentDao{
 
 	@Override
 	public String registerStudent(Student student) throws StudentException {
-String result = "Not Inserted..";
+		String result = "Not Inserted..";
 		
-		try(Connection conn= DBUtil.provideConnection()) {
+		try(Connection conn = DBUtil.provideConnection()) {
 		
 			PreparedStatement ps1 =conn.prepareStatement("Select * from student where username = ?");
 			ps1.setString(1,student.getUserName());
@@ -39,7 +39,7 @@ String result = "Not Inserted..";
 				ps.setString(2, student.getUserName());
 				ps.setString(3, student.getPassword());
 					
-				int x= ps.executeUpdate();
+				int x = ps.executeUpdate();
 				
 				if(x >0)
 					result = "Student Registered Sucessfully ! ";
@@ -151,7 +151,7 @@ String message= "Not enrolled....!";
 				PreparedStatement ps = conn.prepareStatement("update student set password = ?  where username = ?");//SQL query to update password.
 				ps.setString(1, newPassword);
 				ps.setString(2,username);
-						int x =ps.executeUpdate();
+						int x = ps.executeUpdate();
 						if(x > 0)
 							message="Password Updated .....";
 						else
