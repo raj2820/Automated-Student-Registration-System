@@ -14,6 +14,6 @@
 ER diagram created using MySQL Workbench.
 <h1 align="center"> Tech stack : JAVA , JDBC and MySQL</h1>
 <h3> Feature :-   </h3> </br>
-1. Admin Features:- Login | Register | Create a course | Update Fees | Create Batch | Delete Course | View Students in a particular course | View all students in all Batches | Update Batch size.
+1. Admin Features:- Login | Register | Create a course | Update Fees | Create Batch | Delete Course | View Students in a particular course | View all students in all Batches | Update Batch size. </br>
 2. Student Features :- Login | Register | Update Password | Enroll In a course.
 
