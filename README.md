@@ -12,3 +12,4 @@
 
 
 ER diagram created using MySQL Workbench.
+<h1 align="center"> Project topic :- Tech stack : JAVA , JDBC and MySQL</h1>
